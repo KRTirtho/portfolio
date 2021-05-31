@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 tui = "0.15"
 termion = "1.5"
+open = "1.7.0"

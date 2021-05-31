@@ -1,8 +1,12 @@
 mod utils;
 mod views {
+    pub mod achievements;
     pub mod home;
     pub mod profile_pic;
+    pub mod projects;
     pub mod skills;
+    pub mod plans;
+    pub mod help;
 }
 
 use crate::{
@@ -11,10 +15,13 @@ use crate::{
         TabsState,
     },
     views::{
+        achievements::{create_achievements, AchievementsApp},
         home::create_home,
-        skills::{create_skills, App as ListApp},
+        projects::{create_projects, App as ListApp},
+        skills::create_skills,
     },
 };
+use open;
 use std::io;
 use termion::{event::Key, input::MouseTerminal, raw::IntoRawMode, screen::AlternateScreen};
 use tui::{
@@ -41,10 +48,12 @@ fn main() -> Result<(), io::Error> {
     let event = Events::new();
 
     let mut app = App {
-        tabs: TabsState::new(vec!["Home", "Skills", "Plans"]),
+        tabs: TabsState::new(vec!["Home", "Projects", "Skill", "Achievements", "Plans"]),
     };
 
-    let mut list_app = ListApp::new();
+    let mut projects_app = ListApp::new();
+    let mut cwp_app = ListApp::new_current_working_projects();
+    let mut achievements_app = AchievementsApp::new();
 
     terminal.clear()?;
     loop {
@@ -58,7 +67,7 @@ fn main() -> Result<(), io::Error> {
 
             let block = Block::default();
             f.render_widget(block, size);
-
+            // tab titles
             let titles: Vec<Spans> = app
                 .tabs
                 .titles
@@ -84,21 +93,87 @@ fn main() -> Result<(), io::Error> {
                 );
             f.render_widget(tabs, chunks[0]);
 
+            // individual pages for each tabs
             match app.tabs.index {
                 0 => create_home(f, chunks[1]),
-                1 => create_skills(f, chunks[1], &mut list_app),
-                2 => create_home(f, chunks[1]),
+                1 => create_projects(f, chunks[1], &mut projects_app, &mut cwp_app),
+                2 => create_skills(f, chunks[1]),
+                3 => create_achievements(f, chunks[1], &mut achievements_app),
+                4 => create_home(f, chunks[1]),
                 _ => unreachable!(),
             };
         })?;
 
+        // handling inputs/interactions
         match event.next() {
             Ok(Event::Input(key)) => match key {
                 Key::Char('q') | Key::Ctrl('c') => break,
                 Key::Char('\t') => app.tabs.next(),
                 Key::BackTab => app.tabs.previous(),
-                Key::Down => list_app.items.next(),
-                Key::Up => list_app.items.previous(),
+                Key::Down => match app.tabs.index {
+                    1 => {
+                        let selected = projects_app.items.state.selected();
+                        if selected.is_some()
+                            || (cwp_app.items.state.selected().is_none() && selected.is_none())
+                        {
+                            projects_app.items.next();
+                        } else {
+                            cwp_app.items.next();
+                        }
+                    }
+                    3 => achievements_app.items.next(),
+                    _ => {}
+                },
+                Key::Up => match app.tabs.index {
+                    1 => {
+                        let selected = projects_app.items.state.selected();
+                        if selected.is_some()
+                            || (cwp_app.items.state.selected().is_none() && selected.is_none())
+                        {
+                            projects_app.items.previous();
+                        } else {
+                            cwp_app.items.previous();
+                        }
+                    }
+                    3 => achievements_app.items.previous(),
+                    _ => {}
+                },
+                Key::Right => {
+                    if projects_app.items.state.selected().is_some() {
+                        projects_app.items.unselect();
+                        cwp_app.items.state.select(Some(0));
+                    }
+                }
+                Key::Left => {
+                    if cwp_app.items.state.selected().is_some() {
+                        cwp_app.items.unselect();
+                        projects_app.items.state.select(Some(0));
+                    }
+                }
+                Key::Char('\n') => match app.tabs.index {
+                    1 => {
+                        let project_selected = projects_app.items.state.selected();
+                        let cwp_selected = cwp_app.items.state.selected();
+                        let focused_item = if projects_app.items.state.selected().is_some() {
+                            &projects_app.items.items
+                        } else {
+                            &cwp_app.items.items
+                        };
+
+                        if let Some(index) = project_selected {
+                            open::that(focused_item[index].2)?;
+                        } else if let Some(index) = cwp_selected {
+                            open::that(focused_item[index].2)?;
+                        }
+                    }
+                    3 => {
+                        let focused_achievement_item = achievements_app.items.state.selected();
+                        if let Some(index) = focused_achievement_item {
+                            open::that(achievements_app.items.items[index].2)?;
+                        }
+                    }
+                    _ => {}
+                },
                 _ => {}
             },
             _ => {}
