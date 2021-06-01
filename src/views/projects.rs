@@ -1,11 +1,4 @@
-use tui::{
-    backend::Backend,
-    layout::{Constraint, Direction, Layout, Rect},
-    style::{Color, Modifier, Style},
-    text::{Span, Spans},
-    widgets::{Block, Borders, List, ListItem, Paragraph, Wrap},
-    Frame,
-};
+use tui::{Frame, backend::Backend, layout::{Constraint, Direction, Layout, Rect}, style::{Color, Modifier, Style}, text::{Span, Spans}, widgets::{Block, BorderType, Borders, List, ListItem, Paragraph, Wrap}};
 
 use crate::utils::StatefulList;
 
@@ -100,6 +93,7 @@ where
         .block(
             Block::default()
                 .borders(Borders::ALL)
+                .border_type(BorderType::Rounded)
                 .title("Projects (finished), unfinished 100+😑😒"),
         )
         .highlight_style(
@@ -137,7 +131,8 @@ where
         .block(
             Block::default()
                 .borders(Borders::ALL)
-                .title("Currently working projects"),
+                .title("Currently working projects")
+                .border_type(BorderType::Rounded),
         )
         .highlight_style(
             Style::default()
@@ -149,7 +144,7 @@ where
     f.render_stateful_widget(items, inner_chunks[1], &mut cwp_app.items.state);
 
     // descriptions
-    let block = Block::default().title("Descriptions").borders(Borders::ALL);
+    let block = Block::default().title("Descriptions").borders(Borders::ALL).border_type(BorderType::Rounded);
 
     let project_selected = app.items.state.selected();
     let cwp_selected = cwp_app.items.state.selected();

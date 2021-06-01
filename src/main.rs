@@ -2,11 +2,10 @@ mod utils;
 mod views {
     pub mod achievements;
     pub mod home;
+    pub mod plans;
     pub mod profile_pic;
     pub mod projects;
     pub mod skills;
-    pub mod plans;
-    pub mod help;
 }
 
 use crate::{
@@ -17,6 +16,7 @@ use crate::{
     views::{
         achievements::{create_achievements, AchievementsApp},
         home::create_home,
+        plans::create_plans,
         projects::{create_projects, App as ListApp},
         skills::create_skills,
     },
@@ -26,12 +26,12 @@ use std::io;
 use termion::{event::Key, input::MouseTerminal, raw::IntoRawMode, screen::AlternateScreen};
 use tui::{
     backend::TermionBackend,
-    layout::{Constraint, Direction, Layout},
+    layout::{Alignment, Constraint, Direction, Layout},
     style::Modifier,
     style::{Color, Style},
     text::{Span, Spans},
-    widgets::Tabs,
-    widgets::{Block, Borders},
+    widgets::{Block, Borders, Wrap},
+    widgets::{Paragraph, Tabs},
     Terminal,
 };
 
@@ -48,7 +48,7 @@ fn main() -> Result<(), io::Error> {
     let event = Events::new();
 
     let mut app = App {
-        tabs: TabsState::new(vec!["Home", "Projects", "Skill", "Achievements", "Plans"]),
+        tabs: TabsState::new(vec!["Home", "Projects", "Skills", "Achievements", "Plans"]),
     };
 
     let mut projects_app = ListApp::new();
@@ -61,8 +61,14 @@ fn main() -> Result<(), io::Error> {
             let size = f.size();
             let chunks = Layout::default()
                 .direction(Direction::Vertical)
-                .margin(2)
-                .constraints([Constraint::Length(3), Constraint::Min(0)].as_ref())
+                .constraints(
+                    [
+                        Constraint::Percentage(7),
+                        Constraint::Percentage(87),
+                        Constraint::Percentage(5),
+                    ]
+                    .as_ref(),
+                )
                 .split(size);
 
             let block = Block::default();
@@ -99,9 +105,29 @@ fn main() -> Result<(), io::Error> {
                 1 => create_projects(f, chunks[1], &mut projects_app, &mut cwp_app),
                 2 => create_skills(f, chunks[1]),
                 3 => create_achievements(f, chunks[1], &mut achievements_app),
-                4 => create_home(f, chunks[1]),
+                4 => create_plans(f, chunks[1]),
                 _ => unreachable!(),
             };
+
+            fn help_btn<'a>(content: &'a str, bg: Color) -> Span<'a> {
+                Span::styled(content, Style::default().fg(Color::White).bg(bg))
+            }
+
+            // help things
+            let helps = Paragraph::new(Spans::from(vec![
+                help_btn(" Tab ↹ Next tab ", Color::Magenta),
+                help_btn(" Shift+Tab ↹ Previous tab ", Color::LightBlue),
+                help_btn(" UP ↑ previous item ", Color::DarkGray),
+                help_btn(" DOWN ↓ next item ", Color::Green),
+                help_btn(" RIGHT → next list ", Color::LightRed),
+                help_btn(" Left ← previous list ", Color::LightBlue),
+                help_btn(" Enter ⏎ open link ", Color::Cyan),
+                help_btn(" q/Ctrl+C exit ", Color::Red),
+            ]))
+            .alignment(Alignment::Center)
+            .wrap(Wrap { trim: false });
+
+            f.render_widget(helps, chunks[2]);
         })?;
 
         // handling inputs/interactions

@@ -1,11 +1,4 @@
-use tui::{
-    backend::Backend,
-    layout::{Constraint, Direction, Layout, Rect},
-    style::{Color, Modifier, Style},
-    text::{Span, Spans},
-    widgets::{Block, Borders, List, ListItem},
-    Frame,
-};
+use tui::{Frame, backend::Backend, layout::{Constraint, Direction, Layout, Rect}, style::{Color, Modifier, Style}, text::{Span, Spans}, widgets::{Block, BorderType, Borders, List, ListItem}};
 
 use crate::utils::StatefulList;
 
@@ -104,7 +97,8 @@ where
         .block(
             Block::default()
                 .borders(Borders::ALL)
-                .title("Achievements (only 8 certifications but youtube tutorials 1000+ 🤫)"),
+                .title("Achievements (only 8 certifications but youtube tutorials 1000+ 🤫)")
+                .border_type(BorderType::Rounded),
         )
         .highlight_style(
             Style::default()
