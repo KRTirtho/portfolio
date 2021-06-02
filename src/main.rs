@@ -6,6 +6,7 @@ mod views {
     pub mod profile_pic;
     pub mod projects;
     pub mod skills;
+    pub mod social;
 }
 
 use crate::{
@@ -19,6 +20,7 @@ use crate::{
         plans::create_plans,
         projects::{create_projects, App as ListApp},
         skills::create_skills,
+        social::{create_social, SocialApp},
     },
 };
 use open;
@@ -48,12 +50,20 @@ fn main() -> Result<(), io::Error> {
     let event = Events::new();
 
     let mut app = App {
-        tabs: TabsState::new(vec!["Home", "Projects", "Skills", "Achievements", "Plans"]),
+        tabs: TabsState::new(vec![
+            "Home",
+            "Projects",
+            "Skills",
+            "Achievements",
+            "Plans",
+            "Connect",
+        ]),
     };
 
     let mut projects_app = ListApp::new();
     let mut cwp_app = ListApp::new_current_working_projects();
     let mut achievements_app = AchievementsApp::new();
+    let mut social_app = SocialApp::new();
 
     terminal.clear()?;
     loop {
@@ -106,6 +116,7 @@ fn main() -> Result<(), io::Error> {
                 2 => create_skills(f, chunks[1]),
                 3 => create_achievements(f, chunks[1], &mut achievements_app),
                 4 => create_plans(f, chunks[1]),
+                5 => create_social(f, chunks[1], &mut social_app),
                 _ => unreachable!(),
             };
 
@@ -148,6 +159,7 @@ fn main() -> Result<(), io::Error> {
                         }
                     }
                     3 => achievements_app.items.next(),
+                    5 => social_app.links.next(),
                     _ => {}
                 },
                 Key::Up => match app.tabs.index {
@@ -162,6 +174,7 @@ fn main() -> Result<(), io::Error> {
                         }
                     }
                     3 => achievements_app.items.previous(),
+                    5 => social_app.links.previous(),
                     _ => {}
                 },
                 Key::Right => {
@@ -196,6 +209,12 @@ fn main() -> Result<(), io::Error> {
                         let focused_achievement_item = achievements_app.items.state.selected();
                         if let Some(index) = focused_achievement_item {
                             open::that(achievements_app.items.items[index].2)?;
+                        }
+                    }
+                    5 => {
+                        let focused_link = social_app.links.state.selected();
+                        if let Some(index) = focused_link {
+                            open::that(social_app.links.items[index].1)?;
                         }
                     }
                     _ => {}
