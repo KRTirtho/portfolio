@@ -1,11 +1,4 @@
-use tui::{
-    backend::Backend,
-    layout::{Constraint, Direction, Layout, Rect},
-    style::{Color, Modifier, Style},
-    text::{Span, Spans},
-    widgets::{List, ListItem, Paragraph, Wrap},
-    Frame,
-};
+use tui::{Frame, backend::Backend, layout::{Constraint, Direction, Layout, Rect}, style::{Color, Modifier, Style}, text::{Span, Spans}, widgets::{Block, List, ListItem, Paragraph, Wrap}};
 
 use crate::utils::StatefulList;
 
@@ -39,12 +32,13 @@ where
         .direction(Direction::Vertical)
         .constraints(
             [
-                Constraint::Percentage(20),
+                Constraint::Percentage(40),
                 Constraint::Percentage(2),
-                Constraint::Percentage(78),
+                Constraint::Percentage(58),
             ]
             .as_ref(),
         )
+        .margin(5)
         .split(size);
 
     let info = Paragraph::new(
@@ -91,7 +85,8 @@ where
         Style::default()
             .bg(Color::DarkGray)
             .add_modifier(Modifier::BOLD),
-    );
+    )
+        .block(Block::default().title("Links:"));
 
     f.render_stateful_widget(items, chunks[2], &mut app.links.state);
 }

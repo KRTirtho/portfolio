@@ -1,68 +1,73 @@
+use tui::text::{Span, Spans};
+use tui::widgets::{Block, BorderType, Borders, Gauge};
 use tui::{
     backend::Backend,
     layout::{Constraint, Direction, Layout, Rect},
     style::{Color, Style},
     Frame,
 };
-use tui::widgets::{Block, BorderType, Borders, Gauge};
 
 pub fn create_skills<T>(f: &mut Frame<T>, size: Rect)
 where
     T: Backend,
 {
     let skills: Vec<Gauge> = vec![
+        // (name, percent-ratio, fg, bg)
+        (" JavaScript ", 0.9, Color::Black, Color::Rgb(245, 211, 60)),
+        (" Typescript ", 0.85, Color::White, Color::Rgb(47, 116, 192)),
         (
-            "JavaScript",
-            0.9,
-            Color::Rgb(245, 211, 60),
-            Color::Rgb(207, 180, 48),
-        ),
-        ("Typescript", 0.85, Color::Rgb(47, 116, 192), Color::White),
-        (
-            "NodeJS",
+            " NodeJS ",
             0.7,
-            Color::Rgb(109, 181, 78),
-            Color::Rgb(60, 130, 59),
+            Color::Rgb(51, 51, 51),
+            Color::Rgb(121, 180, 97),
         ),
-        ("React", 0.8, Color::Cyan, Color::LightCyan),
-        ("Express", 0.95, Color::DarkGray, Color::Gray),
-        ("NestJS", 0.65, Color::Red, Color::LightRed),
-        ("GraphQL", 1.0, Color::Magenta, Color::LightMagenta),
-        ("Deno", 0.5, Color::White, Color::Rgb(51, 51, 51)),
-        ("Rust", 0.4, Color::Rgb(239, 74, 0), Color::Rgb(231, 133, 0)),
+        (" React ", 0.8, Color::Cyan, Color::Rgb(51, 51, 51)),
+        (" Express ", 0.95, Color::DarkGray, Color::Gray),
+        (" NestJS ", 0.65, Color::Black, Color::Rgb(234, 40, 69)),
         (
-            "Flutter",
+            " GraphQL ",
+            1.0,
+            Color::Rgb(224, 0, 151),
+            Color::Rgb(51, 51, 51),
+        ),
+        (" Deno ", 0.5, Color::White, Color::Rgb(51, 51, 51)),
+        (" Rust ", 0.4, Color::Black, Color::Rgb(188, 112, 70)),
+        (
+            " Flutter ",
             0.4,
             Color::Rgb(81, 191, 240),
             Color::Rgb(1, 84, 150),
         ),
         (
-            "Python (abandoned)",
+            " Python (abandoned) ",
             0.3,
-            Color::Rgb(1, 84, 150),
             Color::LightYellow,
+            Color::Rgb(1, 84, 150),
         ),
-        ("QT", 0.2, Color::LightGreen, Color::Green),
-        ("NodeGUI", 0.9, Color::White, Color::DarkGray),
+        (" QT ", 0.2, Color::White, Color::Rgb(63, 199, 79)),
+        (" NodeGUI ", 0.9, Color::Black, Color::White),
         (
-            "React-Nodegui (major contributor)",
+            " React-Nodegui (major contributor) ",
             1.0,
+            Color::Black,
             Color::White,
-            Color::DarkGray,
         ),
-        ("MongoDB", 0.7, Color::LightGreen, Color::Green),
+        (" MongoDB ", 0.7, Color::Rgb(76, 164, 73), Color::White),
         (
-            "PostgreSQL",
+            " PostgreSQL ",
             0.6,
+            Color::White,
             Color::Rgb(50, 92, 141),
-            Color::Rgb(29, 125, 242),
         ),
     ]
     .iter()
     .map(|(name, ratio, fg, bg)| {
         Gauge::default()
-            .gauge_style(Style::default().fg(*fg).bg(*bg))
-            .block(Block::default().title(*name))
+            .gauge_style(Style::default().fg(Color::LightBlue).bg(Color::Magenta))
+            .block(Block::default().title(Spans::from(Span::styled(
+                *name,
+                Style::default().fg(*fg).bg(*bg),
+            ))))
             .use_unicode(true)
             .ratio(*ratio)
     })
