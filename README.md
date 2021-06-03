@@ -10,10 +10,10 @@ You can either download it from the [release page](https://github.com/KRTirtho/p
 
 ```bash
 # download
-wget https://github.com/KRTirtho/portfolio/releases/download/v0.1.0/portfolio
+$ wget https://github.com/KRTirtho/portfolio/releases/download/v0.1.0/portfolio
 # give execution permission
-chmod +x ./portfolio
-./portfolio
+$ chmod +x ./portfolio
+$ ./portfolio
 ```
 
 ## Let's be friends
