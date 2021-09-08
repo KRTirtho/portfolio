@@ -1,4 +1,11 @@
-use tui::{Frame, backend::Backend, layout::{Constraint, Direction, Layout, Rect}, style::{Color, Modifier, Style}, text::{Span, Spans}, widgets::{Block, List, ListItem, Paragraph, Wrap}};
+use tui::{
+    backend::Backend,
+    layout::{Constraint, Direction, Layout, Rect},
+    style::{Color, Modifier, Style},
+    text::{Span, Spans},
+    widgets::{Block, List, ListItem, Paragraph, Wrap},
+    Frame,
+};
 
 use crate::utils::StatefulList;
 
@@ -81,11 +88,12 @@ where
         })
         .collect();
 
-    let items = List::new(items).highlight_style(
-        Style::default()
-            .bg(Color::DarkGray)
-            .add_modifier(Modifier::BOLD),
-    )
+    let items = List::new(items)
+        .highlight_style(
+            Style::default()
+                .bg(Color::DarkGray)
+                .add_modifier(Modifier::BOLD),
+        )
         .block(Block::default().title("Links:"));
 
     f.render_stateful_widget(items, chunks[2], &mut app.links.state);

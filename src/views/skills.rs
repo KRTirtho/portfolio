@@ -53,12 +53,7 @@ where
             Color::White,
         ),
         (" MongoDB ", 0.7, Color::Rgb(76, 164, 73), Color::White),
-        (
-            " PostgreSQL ",
-            0.6,
-            Color::White,
-            Color::Rgb(50, 92, 141),
-        ),
+        (" PostgreSQL ", 0.6, Color::White, Color::Rgb(50, 92, 141)),
     ]
     .iter()
     .map(|(name, ratio, fg, bg)| {

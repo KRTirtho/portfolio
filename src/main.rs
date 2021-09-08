@@ -10,10 +10,7 @@ mod views {
 }
 
 use crate::{
-    utils::{
-        events::{Event, Events},
-        TabsState,
-    },
+    utils::TabsState,
     views::{
         achievements::{create_achievements, AchievementsApp},
         home::create_home,
@@ -23,11 +20,14 @@ use crate::{
         social::{create_social, SocialApp},
     },
 };
+use crossterm::{
+    event::{read, Event, KeyCode, KeyEvent, KeyModifiers},
+    terminal::enable_raw_mode,
+};
 use open;
 use std::io;
-use termion::{event::Key, input::MouseTerminal, raw::IntoRawMode, screen::AlternateScreen};
 use tui::{
-    backend::TermionBackend,
+    backend::CrosstermBackend,
     layout::{Alignment, Constraint, Direction, Layout},
     style::Modifier,
     style::{Color, Style},
@@ -42,12 +42,12 @@ struct App<'a> {
 }
 
 fn main() -> Result<(), io::Error> {
-    let stdout = io::stdout().into_raw_mode()?;
-    let stdout = MouseTerminal::from(stdout);
-    let stdout = AlternateScreen::from(stdout);
-    let backend = TermionBackend::new(stdout);
+    let stdout = io::stdout();
+    // let stdout = MouseTerminal::from(stdout);
+    // let stdout = AlternateScreen::from(stdout);
+    let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
-    let event = Events::new();
+    // let event = Events::new();
 
     let mut app = App {
         tabs: TabsState::new(vec![
@@ -141,13 +141,27 @@ fn main() -> Result<(), io::Error> {
             f.render_widget(helps, chunks[2]);
         })?;
 
+        enable_raw_mode().unwrap();
+
         // handling inputs/interactions
-        match event.next() {
-            Ok(Event::Input(key)) => match key {
-                Key::Char('q') | Key::Ctrl('c') => break,
-                Key::Char('\t') => app.tabs.next(),
-                Key::BackTab => app.tabs.previous(),
-                Key::Down => match app.tabs.index {
+        match read().unwrap() {
+            Event::Key(code) => match code {
+                KeyEvent {
+                    code: KeyCode::Char('q'),
+                    modifiers: KeyModifiers::NONE,
+                } => break,
+                KeyEvent {
+                    code: KeyCode::Tab,
+                    modifiers: KeyModifiers::NONE,
+                } => app.tabs.next(),
+                KeyEvent {
+                    code: KeyCode::BackTab,
+                    modifiers: KeyModifiers::NONE,
+                } => app.tabs.previous(),
+                KeyEvent {
+                    code: KeyCode::Down,
+                    modifiers: KeyModifiers::NONE,
+                } => match app.tabs.index {
                     1 => {
                         let selected = projects_app.items.state.selected();
                         if selected.is_some()
@@ -162,7 +176,10 @@ fn main() -> Result<(), io::Error> {
                     5 => social_app.links.next(),
                     _ => {}
                 },
-                Key::Up => match app.tabs.index {
+                KeyEvent {
+                    code: KeyCode::Up,
+                    modifiers: KeyModifiers::NONE,
+                } => match app.tabs.index {
                     1 => {
                         let selected = projects_app.items.state.selected();
                         if selected.is_some()
@@ -177,19 +194,28 @@ fn main() -> Result<(), io::Error> {
                     5 => social_app.links.previous(),
                     _ => {}
                 },
-                Key::Right => {
+                KeyEvent {
+                    code: KeyCode::Right,
+                    modifiers: KeyModifiers::NONE,
+                } => {
                     if projects_app.items.state.selected().is_some() {
                         projects_app.items.unselect();
                         cwp_app.items.state.select(Some(0));
                     }
                 }
-                Key::Left => {
+                KeyEvent {
+                    code: KeyCode::Left,
+                    modifiers: KeyModifiers::NONE,
+                } => {
                     if cwp_app.items.state.selected().is_some() {
                         cwp_app.items.unselect();
                         projects_app.items.state.select(Some(0));
                     }
                 }
-                Key::Char('\n') => match app.tabs.index {
+                KeyEvent {
+                    code: KeyCode::Enter,
+                    modifiers: KeyModifiers::NONE,
+                } => match app.tabs.index {
                     1 => {
                         let project_selected = projects_app.items.state.selected();
                         let cwp_selected = cwp_app.items.state.selected();
