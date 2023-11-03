@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
+import Navbar from '@/components/navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Poppins({ weight: ["400"], subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Portfolio | Kingkor Roy Tirtho',
@@ -18,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} mx-auto max-w-6xl px-5 bg-background dark:bg-background-dark text-gray-900 dark:text-gray-100`}>
+        <Navbar/>
+        {children}
+      </body>
     </html>
   )
 }
