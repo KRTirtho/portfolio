@@ -28,7 +28,7 @@ const ProjectsModule = async () => {
   return (
     <section id="projects" className="space-y-4">
       <DottedHeader>Projects</DottedHeader>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {ghProjects.map(({ project: { data }, image }) => {
           return <ProjectCard key={data.id} project={data} image={image} />;
         })}
