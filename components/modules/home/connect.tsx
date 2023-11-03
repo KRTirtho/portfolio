@@ -29,7 +29,7 @@ const ConnectModule = () => {
   return (
     <section id="connect" className="space-y-5">
       <DottedHeader>Connect</DottedHeader>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {Object.entries(links).map(([name, { link, icon: Icon }]) => (
           <div
             key={name}

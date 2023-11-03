@@ -34,8 +34,6 @@ function ProjectDialog({ image, project, open, onClose }: ProjectDialogProps) {
     [data?.data],
   );
 
-  console.log(project);
-
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
