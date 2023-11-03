@@ -1,7 +1,13 @@
 import Card from "@/components/ui/card";
 import DottedHeader from "@/components/ui/dotted-header";
 import Image from "next/image";
-import { LuGithub, LuLinkedin, LuMail, LuMapPin, LuTwitter } from "react-icons/lu";
+import {
+  LuGithub,
+  LuLinkedin,
+  LuMail,
+  LuMapPin,
+  LuTwitter,
+} from "react-icons/lu";
 import { BsMedium } from "react-icons/bs";
 
 const links = {
@@ -24,7 +30,7 @@ const links = {
   "krtirtho@gmail.com": {
     link: "mailto:krtirtho@gmail.com",
     icon: LuMail,
-  }
+  },
 };
 
 export default function Home() {
@@ -54,13 +60,15 @@ export default function Home() {
         </Card>
       </section>
 
-      <section className="space-y-5">
+      <section id="connect" className="space-y-5">
         <DottedHeader>Connect</DottedHeader>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {Object.entries(links).map(([name, { link, icon: Icon }]) => (
             <div
               key={name}
-              className="p-3 rounded-lg transition-all hover:brightness-95 bg-gradient-to-r from-pink-100 to-gray-50 dark:from-secondary-background-dark dark:to-background-dark to-95%"
+              className={`p-3 rounded-lg transition-all hover:brightness-95 bg-gradient-to-r from-pink-100 to-gray-50 dark:from-secondary-background-dark dark:to-background-dark to-95% ${
+                name === "krtirtho@gmail.com" ? "col-span-2 md:col-span-1" : ""
+              }`}
             >
               <a
                 href={link}
