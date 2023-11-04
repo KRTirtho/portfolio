@@ -1,7 +1,7 @@
 import ConnectModule from "@/components/modules/home/connect";
 import ProjectsModule from "@/components/modules/home/projects/projects";
+import SkillsModule from "@/components/modules/home/skills/skills";
 import Card from "@/components/ui/card";
-import DottedHeader from "@/components/ui/dotted-header";
 import Image from "next/image";
 import { LuMapPin } from "react-icons/lu";
 
@@ -33,7 +33,7 @@ export default function Home() {
       </section>
 
       <ConnectModule />
-
+      <SkillsModule />
       <ProjectsModule />
     </main>
   );
