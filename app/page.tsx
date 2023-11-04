@@ -1,3 +1,4 @@
+import BioModule from "@/components/modules/home/bio";
 import ConnectModule from "@/components/modules/home/connect";
 import ProjectsModule from "@/components/modules/home/projects/projects";
 import SkillsModule from "@/components/modules/home/skills/skills";
@@ -32,6 +33,7 @@ export default function Home() {
         </Card>
       </section>
 
+      <BioModule />
       <ConnectModule />
       <SkillsModule />
       <ProjectsModule />
