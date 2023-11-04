@@ -11,7 +11,7 @@ import Link from "next/link";
 
 interface ProjectDialogProps {
   project: GhRepo;
-  image: string;
+  image: string | null;
   open: boolean;
   onClose: () => void;
 }
@@ -70,14 +70,18 @@ function ProjectDialog({ image, project, open, onClose }: ProjectDialogProps) {
                   </span>
                 </button>
 
-                <div className="relative h-40 w-full">
-                  <Image
-                    src={image}
-                    alt={project.full_name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+                {image ? (
+                  <div className="relative h-40 w-full">
+                    <Image
+                      src={image}
+                      alt={project.full_name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-6" />
+                )}
                 <div className="flex justify-between items-center">
                   <Dialog.Title
                     as="h3"

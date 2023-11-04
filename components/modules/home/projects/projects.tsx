@@ -9,7 +9,9 @@ const projects = {
   "fl-query": "/images/projects/fl-query.png",
   wallywiz: "/images/projects/wallywiz.png",
   shopler: "/images/projects/shopler.svg",
-  schoolacious: "/images/projects/schoolacious.jpg",
+  schoolacious: null,
+  metadata_god: null,
+  student_hub: null,
 };
 
 const ProjectsModule = async () => {
