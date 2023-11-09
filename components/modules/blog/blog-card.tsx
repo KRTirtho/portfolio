@@ -26,7 +26,7 @@ const BlogCard: FC<{ article: ArticleIndex }> = ({ article }) => {
   );
   return (
     <Link
-      href={`/blog/${article.slug}`}
+      href={`/blog/${article.path}`}
       className="rounded-xl overflow-hidden"
       style={{
         background: `url(${article.cover_image})`,
