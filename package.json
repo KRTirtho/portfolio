@@ -12,9 +12,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@octokit/rest": "^20.0.2",
+    "@types/lodash-es": "^4.17.11",
     "@types/prismjs": "^1.26.3",
     "chroma-js": "^2.4.2",
     "date-fns": "^2.30.0",
+    "lodash-es": "^4.17.21",
     "next": "14.0.1",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
