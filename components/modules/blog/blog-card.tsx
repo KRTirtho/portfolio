@@ -6,6 +6,7 @@ import { formatDistanceStrict } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC, useMemo } from "react";
+import { FaHeart } from "react-icons/fa";
 
 const BlogCard: FC<{ article: ArticleIndex }> = ({ article }) => {
   const publishedAt = useMemo(
@@ -25,7 +26,7 @@ const BlogCard: FC<{ article: ArticleIndex }> = ({ article }) => {
   );
   return (
     <Link
-      href={`/blog/${article.id}`}
+      href={`/blog/${article.slug}`}
       className="rounded-xl overflow-hidden"
       style={{
         background: `url(${article.cover_image})`,
@@ -48,17 +49,38 @@ const BlogCard: FC<{ article: ArticleIndex }> = ({ article }) => {
         ) : (
           <div className="w-full h-56 rounded-lg bg-background/50 dark:bg-background-dark/50"></div>
         )}
-        <div className="space-y-4">
-          <div className="space-y-1">
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <div className="flex gap-2 items-center">
+              {article.user.profile_image_90 && (
+                <Image
+                  src={article.user.profile_image_90}
+                  alt={article.user.name ?? ""}
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                />
+              )}
+              <div>
+                <h6 className="text-lg font-medium">{article.user.name}</h6>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  {article.reading_time_minutes} min read
+                </span>
+              </div>
+            </div>
             <p
               className="text-gray-500 dark:text-gray-400 text-end"
               title={fullPublishDate}
             >
               {publishedAt}
             </p>
-            <h3 className="text-2xl">{article.title}</h3>
           </div>
+          <h3 className="text-2xl mb-2">{article.title}</h3>
           <p>{article.description}</p>
+        </div>
+        <div className="absolute bottom-5 end-5 flex items-center gap-1 self-end">
+          <FaHeart className="text-red-500" />
+          {article.public_reactions_count}
         </div>
       </Card>
     </Link>
