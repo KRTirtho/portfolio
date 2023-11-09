@@ -6,9 +6,10 @@ import { useState } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
 const items = {
-  "#connect": "Connect",
-  "#projects": "Projects",
-  "#skills": "Skills",
+  "/blog": "Blog",
+  "/#connect": "Connect",
+  "/#projects": "Projects",
+  "/#skills": "Skills",
 };
 
 const Navbar = () => {
@@ -17,7 +18,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="relative flex items-center justify-between mb-4 px-5 py-2">
-        <h2 className="text-3xl">Portfolio</h2>
+        <Link href="/">
+          <h2 className="text-3xl">Portfolio</h2>
+        </Link>
         <ul className="hidden md:flex gap-10 m-5 justify-end">
           {Object.entries(items).map(([link, text]) => (
             <li key={link}>
