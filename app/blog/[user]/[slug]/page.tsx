@@ -6,6 +6,8 @@ import { merge } from "lodash-es";
 import { NextPage, Metadata } from "next";
 import Image from "next/image";
 
+export const runtime = 'edge';
+
 interface BlogArticlePageProps {
   params: {
     user: string;
