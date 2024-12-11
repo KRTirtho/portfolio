@@ -18,9 +18,7 @@ export async function generateStaticParams() {
 	const articles = await ArticlesService.getUserAllArticles();
 
 	return articles.map((article) => ({
-		params: {
-			slug: article.slug,
-		},
+		slug: article.slug,
 	}));
 }
 
@@ -33,6 +31,8 @@ interface BlogArticlePageProps {
 export async function generateMetadata({
 	params: { slug },
 }: BlogArticlePageProps): Promise<Metadata> {
+  // Wait for 300ms to avoid rate limiting
+  await new Promise((resolve) => setTimeout(resolve, 300));
 	const user = (await UsersService.getUserMe()) as User;
 	const article = (await ArticlesService.getArticleByPath(
 		user.username as string,
