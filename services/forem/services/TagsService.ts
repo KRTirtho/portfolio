@@ -1,16 +1,13 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { FollowedTag } from '../models/FollowedTag';
 import type { Tag } from '../models/Tag';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class TagsService {
-
     /**
      * Followed Tags
      * This endpoint allows the client to retrieve a list of the tags they follow.
@@ -20,13 +17,12 @@ export class TagsService {
     public static getFollowedTags(): CancelablePromise<Array<FollowedTag>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/follows/tags',
+            url: '/follows/tags',
             errors: {
                 401: `unauthorized`,
             },
         });
     }
-
     /**
      * Tags
      * This endpoint allows the client to retrieve a list of tags that can be used to tag articles.
@@ -45,12 +41,11 @@ export class TagsService {
     ): CancelablePromise<Array<Tag>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/tags',
+            url: '/tags',
             query: {
                 'page': page,
                 'per_page': perPage,
             },
         });
     }
-
 }

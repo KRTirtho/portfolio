@@ -1,12 +1,10 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { ArticleFlareTag } from './ArticleFlareTag';
 import type { SharedOrganization } from './SharedOrganization';
 import type { SharedUser } from './SharedUser';
-
 /**
  * Representation of an article or post returned in a list
  */

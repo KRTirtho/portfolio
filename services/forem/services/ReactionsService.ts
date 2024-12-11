@@ -1,13 +1,11 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class ReactionsService {
-
     /**
      * toggle reaction
      * This endpoint allows the client to toggle the user's reaction to a specified reactable (eg, Article, Comment, or User). For examples:
@@ -19,14 +17,14 @@ export class ReactionsService {
      * @returns any successful
      * @throws ApiError
      */
-    public static postApiReactionsToggle(
+    public static postReactionsToggle(
         category: 'like' | 'unicorn' | 'exploding_head' | 'raised_hands' | 'fire',
         reactableId: number,
         reactableType: 'Comment' | 'Article' | 'User',
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/reactions/toggle',
+            url: '/reactions/toggle',
             query: {
                 'category': category,
                 'reactable_id': reactableId,
@@ -37,7 +35,6 @@ export class ReactionsService {
             },
         });
     }
-
     /**
      * create reaction
      * This endpoint allows the client to create a reaction to a specified reactable (eg, Article, Comment, or User). For examples:
@@ -49,14 +46,14 @@ export class ReactionsService {
      * @returns any successful
      * @throws ApiError
      */
-    public static postApiReactions(
+    public static postReactions(
         category: 'like' | 'unicorn' | 'exploding_head' | 'raised_hands' | 'fire',
         reactableId: number,
         reactableType: 'Comment' | 'Article' | 'User',
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/reactions',
+            url: '/reactions',
             query: {
                 'category': category,
                 'reactable_id': reactableId,
@@ -67,5 +64,4 @@ export class ReactionsService {
             },
         });
     }
-
 }

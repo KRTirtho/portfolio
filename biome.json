@@ -3,15 +3,25 @@
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
-		"useIgnoreFile": false
+		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": false,
-		"ignore": []
+		"ignoreUnknown": true,
+		"ignore": [
+      "./node_modules/**",
+      "./.next/**",
+      "./.vercel/**",
+      "./build/**",
+      "./services/forem/**"
+    ]
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+    "ignore": [
+      "./services/forem/**/*.ts",
+      "./node_modules"
+    ]
 	},
 	"organizeImports": {
 		"enabled": true
@@ -19,8 +29,15 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
-		}
+			"recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      }
+		},
+    "ignore": [
+      "./services/forem/**/*.ts",
+      "./node_modules"
+    ]
 	},
 	"javascript": {
 		"formatter": {

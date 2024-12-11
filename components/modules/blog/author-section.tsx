@@ -1,9 +1,9 @@
 "use client";
 
-import { ArticleIndex } from "@/services/forem";
+import type { ArticleIndex } from "@/services/forem";
 import { formatDistanceStrict } from "date-fns";
 import Image from "next/image";
-import React, { FC, useMemo } from "react";
+import React, { type FC, useMemo } from "react";
 
 const AuthorSection: FC<{ article: ArticleIndex }> = ({ article }) => {
   const publishedAt = useMemo(

@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 /**
  * A Display Ad, aka Billboard, aka Widget
  */
@@ -64,9 +63,7 @@ export type DisplayAd = {
      */
     type_of?: DisplayAd.type_of;
 };
-
 export namespace DisplayAd {
-
     /**
      * Identifies which area of site layout the ad can appear in
      */
@@ -80,7 +77,6 @@ export namespace DisplayAd {
         POST_SIDEBAR = 'post_sidebar',
         POST_COMMENTS = 'post_comments',
     }
-
     /**
      * Specifies an group of users to show this ad to (only works with logged-in users)
      */
@@ -98,7 +94,6 @@ export namespace DisplayAd {
         EXPERIENCE4 = 'experience4',
         EXPERIENCE5 = 'experience5',
     }
-
     /**
      * Potentially limits visitors to whom the ad is visible
      */
@@ -107,7 +102,6 @@ export namespace DisplayAd {
         LOGGED_IN = 'logged_in',
         LOGGED_OUT = 'logged_out',
     }
-
     /**
      * Types of the billboards:
      * in_house (created by admins),
@@ -120,7 +114,5 @@ export namespace DisplayAd {
         COMMUNITY = 'community',
         EXTERNAL = 'external',
     }
-
-
 }
 

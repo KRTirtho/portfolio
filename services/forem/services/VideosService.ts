@@ -1,15 +1,12 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { VideoArticle } from '../models/VideoArticle';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class VideosService {
-
     /**
      * Articles with a video
      * This endpoint allows the client to retrieve a list of articles that are uploaded with a video.
@@ -28,12 +25,11 @@ export class VideosService {
     ): CancelablePromise<Array<VideoArticle>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/videos',
+            url: '/videos',
             query: {
                 'page': page,
                 'per_page': perPage,
             },
         });
     }
-
 }

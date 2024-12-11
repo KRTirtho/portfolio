@@ -1,8 +1,7 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 /**
  * Representation of a page object
  */
@@ -37,9 +36,7 @@ export type Page = {
      */
     template: Page.template;
 };
-
 export namespace Page {
-
     /**
      * Controls what kind of layout the page is rendered in
      */
@@ -49,7 +46,5 @@ export namespace Page {
         NAV_BAR_INCLUDED = 'nav_bar_included',
         JSON = 'json',
     }
-
-
 }
 

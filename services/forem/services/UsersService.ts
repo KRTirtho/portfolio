@@ -1,17 +1,14 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { ArticleIndex } from '../models/ArticleIndex';
 import type { User } from '../models/User';
 import type { UserInviteParam } from '../models/UserInviteParam';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class UsersService {
-
     /**
      * User's articles
      * This endpoint allows the client to retrieve a list of published articles on behalf of an authenticated user.
@@ -32,7 +29,7 @@ export class UsersService {
     ): CancelablePromise<Array<ArticleIndex>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/articles/me',
+            url: '/articles/me',
             query: {
                 'page': page,
                 'per_page': perPage,
@@ -42,7 +39,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * User's published articles
      * This endpoint allows the client to retrieve a list of published articles on behalf of an authenticated user.
@@ -63,7 +59,7 @@ export class UsersService {
     ): CancelablePromise<Array<ArticleIndex>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/articles/me/published',
+            url: '/articles/me/published',
             query: {
                 'page': page,
                 'per_page': perPage,
@@ -73,7 +69,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * User's unpublished articles
      * This endpoint allows the client to retrieve a list of unpublished articles on behalf of an authenticated user.
@@ -94,7 +89,7 @@ export class UsersService {
     ): CancelablePromise<Array<ArticleIndex>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/articles/me/unpublished',
+            url: '/articles/me/unpublished',
             query: {
                 'page': page,
                 'per_page': perPage,
@@ -104,7 +99,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * User's all articles
      * This endpoint allows the client to retrieve a list of all articles on behalf of an authenticated user.
@@ -127,7 +121,7 @@ export class UsersService {
     ): CancelablePromise<Array<ArticleIndex>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/articles/me/all',
+            url: '/articles/me/all',
             query: {
                 'page': page,
                 'per_page': perPage,
@@ -137,7 +131,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * Organization's users
      * This endpoint allows the client to retrieve a list of users belonging to the organization
@@ -156,7 +149,7 @@ export class UsersService {
     ): CancelablePromise<Array<User>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/organizations/{username}/users',
+            url: '/organizations/{username}/users',
             path: {
                 'username': username,
             },
@@ -169,7 +162,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * The authenticated user
      * This endpoint allows the client to retrieve information about the authenticated user
@@ -179,13 +171,12 @@ export class UsersService {
     public static getUserMe(): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/users/me',
+            url: '/users/me',
             errors: {
                 401: `Unauthorized`,
             },
         });
     }
-
     /**
      * A User
      * This endpoint allows the client to retrieve a single user, either by id
@@ -201,13 +192,12 @@ export class UsersService {
     ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/users/{id}',
+            url: '/users/{id}',
             path: {
                 'id': id,
             },
         });
     }
-
     /**
      * Unpublish a User's Articles and Comments
      * This endpoint allows the client to unpublish all of the articles and
@@ -232,7 +222,7 @@ export class UsersService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/users/{id}/unpublish',
+            url: '/users/{id}/unpublish',
             path: {
                 'id': id,
             },
@@ -242,7 +232,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * Suspend a User
      * This endpoint allows the client to suspend a user.
@@ -262,7 +251,7 @@ export class UsersService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/users/{id}/suspend',
+            url: '/users/{id}/suspend',
             path: {
                 'id': id,
             },
@@ -272,7 +261,6 @@ export class UsersService {
             },
         });
     }
-
     /**
      * Invite a User
      * This endpoint allows the client to trigger an invitation to the provided email address.
@@ -287,7 +275,7 @@ export class UsersService {
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/admin/users',
+            url: '/admin/users',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -296,5 +284,4 @@ export class UsersService {
             },
         });
     }
-
 }

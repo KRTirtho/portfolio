@@ -1,12 +1,10 @@
-import { JSX } from "react";
-
-import rehypeReact, { Options } from "rehype-react";
+import rehypeReact, { type Options } from "rehype-react";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-import prod from "react/jsx-runtime";
+import * as prod from "react/jsx-runtime";
 import rehypePrism from "rehype-prism";
 
 // you have to load css manual
@@ -66,37 +64,42 @@ import "prismjs/components/prism-zig";
 import "prismjs/components/prism-diff";
 import CustomLink from "./components/custom-link";
 
+export type Jsx = (
+	type: unknown,
+	props: Record<string, any>,
+	key?: string | undefined,
+) => JSX.Element;
+
+
+
 const production: Options = {
-  // @ts-expect-error: the react types are missing.
-  Fragment: prod.Fragment,
-  // @ts-expect-error: the react types are missing.
-  jsx: prod.jsx,
-  // @ts-expect-error: the react types are missing.
-  jsxs: prod.jsxs,
-  components: {
-    a: CustomLink as any,
-  },
+	Fragment: prod.Fragment,
+	jsx: prod.jsx,
+	jsxs: prod.jsxs,
+	components: {
+		a: CustomLink as any,
+	},
 };
 
 export async function reactify(markdown: string): Promise<JSX.Element> {
-  const { result } = await unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkRehype)
-    .use(rehypeSanitize)
-    .use(rehypeReact, production)
-    .use(rehypePrism, {
-      plugins: [
-        "line-numbers",
-        "copy-to-clipboard",
-        "autolinker",
-        "command-line",
-        "diff-highlight",
-        "inline-color",
-        "match-braces",
-      ],
-    })
-    .process(markdown);
+	const { result } = await unified()
+		.use(remarkParse)
+		.use(remarkGfm)
+		.use(remarkRehype)
+		.use(rehypeSanitize)
+		.use(rehypeReact, production)
+		.use(rehypePrism, {
+			plugins: [
+				"line-numbers",
+				"copy-to-clipboard",
+				"autolinker",
+				"command-line",
+				"diff-highlight",
+				"inline-color",
+				"match-braces",
+			],
+		})
+		.process(markdown);
 
-  return result;
+	return result;
 }

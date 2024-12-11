@@ -1,15 +1,12 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { Comment } from '../models/Comment';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class CommentsService {
-
     /**
      * Comments
      * This endpoint allows the client to retrieve all comments belonging to an article or podcast episode as threaded conversations.
@@ -26,7 +23,7 @@ export class CommentsService {
     ): CancelablePromise<Array<Comment>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/comments',
+            url: '/comments',
             query: {
                 'a_id': aId,
                 'p_id': pId,
@@ -36,7 +33,6 @@ export class CommentsService {
             },
         });
     }
-
     /**
      * Comment by id
      * This endpoint allows the client to retrieve a comment as well as his descendants comments.
@@ -53,7 +49,7 @@ export class CommentsService {
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/comments/{id}',
+            url: '/comments/{id}',
             path: {
                 'id': id,
             },
@@ -62,5 +58,4 @@ export class CommentsService {
             },
         });
     }
-
 }

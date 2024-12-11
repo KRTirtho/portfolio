@@ -1,16 +1,13 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { ArticleIndex } from '../models/ArticleIndex';
 import type { User } from '../models/User';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class OrganizationsService {
-
     /**
      * An organization
      * This endpoint allows the client to retrieve a single organization by their username
@@ -23,7 +20,7 @@ export class OrganizationsService {
     ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/organizations/{username}',
+            url: '/organizations/{username}',
             path: {
                 'username': username,
             },
@@ -32,7 +29,6 @@ export class OrganizationsService {
             },
         });
     }
-
     /**
      * Organization's users
      * This endpoint allows the client to retrieve a list of users belonging to the organization
@@ -51,7 +47,7 @@ export class OrganizationsService {
     ): CancelablePromise<Array<User>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/organizations/{username}/users',
+            url: '/organizations/{username}/users',
             path: {
                 'username': username,
             },
@@ -64,7 +60,6 @@ export class OrganizationsService {
             },
         });
     }
-
     /**
      * Organization's Articles
      * This endpoint allows the client to retrieve a list of Articles belonging to the organization
@@ -83,7 +78,7 @@ export class OrganizationsService {
     ): CancelablePromise<Array<ArticleIndex>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/organizations/{username}/articles',
+            url: '/organizations/{username}/articles',
             path: {
                 'username': username,
             },
@@ -96,5 +91,4 @@ export class OrganizationsService {
             },
         });
     }
-
 }

@@ -1,31 +1,27 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { DisplayAd } from '../models/DisplayAd';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class DisplayAdsService {
-
     /**
      * display ads
      * This endpoint allows the client to retrieve a list of all display ads.
      * @returns DisplayAd successful
      * @throws ApiError
      */
-    public static getApiDisplayAds(): CancelablePromise<Array<DisplayAd>> {
+    public static getDisplayAds(): CancelablePromise<Array<DisplayAd>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/display_ads',
+            url: '/display_ads',
             errors: {
                 401: `unauthorized`,
             },
         });
     }
-
     /**
      * display ads
      * This endpoint allows the client to create a new display ad.
@@ -33,12 +29,12 @@ export class DisplayAdsService {
      * @returns any successful
      * @throws ApiError
      */
-    public static postApiDisplayAds(
+    public static postDisplayAds(
         requestBody?: Record<string, any>,
     ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/display_ads',
+            url: '/display_ads',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -47,7 +43,6 @@ export class DisplayAdsService {
             },
         });
     }
-
     /**
      * display ad
      * This endpoint allows the client to retrieve a single display ad, via its id.
@@ -55,12 +50,12 @@ export class DisplayAdsService {
      * @returns any successful
      * @throws ApiError
      */
-    public static getApiDisplayAds1(
+    public static getDisplayAds1(
         id: number,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/display_ads/{id}',
+            url: '/display_ads/{id}',
             path: {
                 'id': id,
             },
@@ -70,7 +65,6 @@ export class DisplayAdsService {
             },
         });
     }
-
     /**
      * display ads
      * This endpoint allows the client to update the attributes of a single display ad, via its id.
@@ -79,13 +73,13 @@ export class DisplayAdsService {
      * @returns any successful
      * @throws ApiError
      */
-    public static putApiDisplayAds(
+    public static putDisplayAds(
         id: number,
         requestBody?: Record<string, any>,
     ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/display_ads/{id}',
+            url: '/display_ads/{id}',
             path: {
                 'id': id,
             },
@@ -97,7 +91,6 @@ export class DisplayAdsService {
             },
         });
     }
-
     /**
      * unpublish
      * This endpoint allows the client to remove a display ad from rotation by un-publishing it.
@@ -105,12 +98,12 @@ export class DisplayAdsService {
      * @returns void
      * @throws ApiError
      */
-    public static putApiDisplayAdsUnpublish(
+    public static putDisplayAdsUnpublish(
         id: number,
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/display_ads/{id}/unpublish',
+            url: '/display_ads/{id}/unpublish',
             path: {
                 'id': id,
             },
@@ -120,5 +113,4 @@ export class DisplayAdsService {
             },
         });
     }
-
 }

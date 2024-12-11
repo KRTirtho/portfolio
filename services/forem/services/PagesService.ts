@@ -1,28 +1,24 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { Page } from '../models/Page';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-
 export class PagesService {
-
     /**
      * show details for all pages
      * This endpoint allows the client to retrieve details for all Page objects.
      * @returns Page successful
      * @throws ApiError
      */
-    public static getApiPages(): CancelablePromise<Array<Page>> {
+    public static getPages(): CancelablePromise<Array<Page>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/pages',
+            url: '/pages',
         });
     }
-
     /**
      * pages
      * This endpoint allows the client to create a new page.
@@ -30,7 +26,7 @@ export class PagesService {
      * @returns any successful
      * @throws ApiError
      */
-    public static postApiPages(
+    public static postPages(
         requestBody?: {
             /**
              * Title of the page
@@ -64,7 +60,7 @@ export class PagesService {
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/pages',
+            url: '/pages',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -73,7 +69,6 @@ export class PagesService {
             },
         });
     }
-
     /**
      * show details for a page
      * This endpoint allows the client to retrieve details for a single Page object, specified by ID.
@@ -81,18 +76,17 @@ export class PagesService {
      * @returns Page successful
      * @throws ApiError
      */
-    public static getApiPages1(
+    public static getPages1(
         id: number,
     ): CancelablePromise<Page> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/pages/{id}',
+            url: '/pages/{id}',
             path: {
                 'id': id,
             },
         });
     }
-
     /**
      * update details for a page
      * This endpoint allows the client to retrieve details for a single Page object, specified by ID.
@@ -101,13 +95,13 @@ export class PagesService {
      * @returns Page successful
      * @throws ApiError
      */
-    public static putApiPages(
+    public static putPages(
         id: number,
         requestBody?: Page,
     ): CancelablePromise<Page> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/pages/{id}',
+            url: '/pages/{id}',
             path: {
                 'id': id,
             },
@@ -119,7 +113,6 @@ export class PagesService {
             },
         });
     }
-
     /**
      * remove a page
      * This endpoint allows the client to delete a single Page object, specified by ID.
@@ -127,12 +120,12 @@ export class PagesService {
      * @returns Page successful
      * @throws ApiError
      */
-    public static deleteApiPages(
+    public static deletePages(
         id: number,
     ): CancelablePromise<Page> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/api/pages/{id}',
+            url: '/pages/{id}',
             path: {
                 'id': id,
             },
@@ -142,5 +135,4 @@ export class PagesService {
             },
         });
     }
-
 }

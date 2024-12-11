@@ -1,6 +1,6 @@
 import { ArticlesService } from "@/services/forem";
 import BlogCard from "@/components/modules/blog/blog-card";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { merge } from "lodash-es";
 import { metadata as rootMetadata } from "@/app/layout";
 

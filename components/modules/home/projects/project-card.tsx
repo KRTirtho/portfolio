@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "@/components/ui/card";
-import { GhRepo, octokit } from "@/services/octokit";
+import type { GhRepo } from "@/services/octokit";
 import Image from "next/image";
 import React, { FC } from "react";
 import { LuStar } from "react-icons/lu";
