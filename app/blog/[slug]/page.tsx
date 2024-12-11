@@ -11,7 +11,8 @@ import { reactify } from "@/services/reactify/reactify";
 import { merge } from "lodash-es";
 import type { NextPage, Metadata } from "next";
 import Image from "next/image";
-import path from "node:path";
+
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
 	const articles = await ArticlesService.getUserAllArticles();
